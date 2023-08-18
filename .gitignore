@@ -1,0 +1,7 @@
+djangoenv/
+*.pyc
+venv/
+text.txt
+.env
+*.sqlite3
+htmlcov/
