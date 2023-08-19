@@ -33,6 +33,7 @@ class AppUser(AbstractBaseUser):
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=False)
     otp = models.CharField(max_length=6 , null=True, blank=True)
 
     objects = AppUserManager()
@@ -56,9 +57,9 @@ class AppUser(AbstractBaseUser):
 class Profile(models.Model):
     user = models.OneToOneField(AppUser, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=255,  null=True)
-    phone = models.CharField(max_length=255)
-    Contact = models.PositiveIntegerField()
-    image = models.ImageField(default="", null=True, blank=True)
+    phone = models.PositiveIntegerField(null=True, blank=True)
+    contact = models.CharField( null=True, blank=True, max_length=255)
+    image = models.ImageField( null=True, blank=True)
 
 
     def __str__(self):
