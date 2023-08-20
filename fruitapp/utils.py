@@ -45,7 +45,7 @@ def predict_fruit(uploaded_image):
     image_path = os.path.abspath(img_path)
 
     result = {
-        "prediction": prediction_label,
+        "prediction": pred,
         'accuracy': '{:.2f}'.format(100 * np.max(score)),
         "image_path": image_path  # Include the full image path
     }

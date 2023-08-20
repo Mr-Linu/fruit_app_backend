@@ -1,4 +1,5 @@
 from datetime import timedelta
+from django.http import Http404
 from django.shortcuts import render
 
 from rest_framework.response import Response
@@ -86,3 +87,33 @@ class ProfileView(APIView):
         
         serializer = RegisterUserSerializer(profile)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+# Update the branch staff details for a particular branch
+
+class UpdateProfileView(APIView):
+    """
+    This class-based view enables the staff to change their details.
+    """
+
+    def get_object(self, id):
+        try:
+            return AppUser.objects.get(id=id)
+        except AppUser.DoesNotExist:
+            raise Http404  # Raise Http404 instead of returning it
+
+    def patch(self, request, id, format=None):
+        staff = self.get_object(id)
+        prof = Profile.objects.get(user=staff)
+        data = request.data
+        serializer = UserProfileSerializer(prof, data, partial=True)
+        
+        if serializer.is_valid():
+            try: 
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
