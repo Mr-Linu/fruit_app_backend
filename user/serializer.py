@@ -16,8 +16,11 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             ownerobj = Profile.objects.get(user = self.user)
             data['full_name'] = ownerobj.full_name
             data['phone'] = ownerobj.phone
-            data['Contact'] = ownerobj.Contact
-            data['image'] = ownerobj.image
+            data['Contact'] = ownerobj.contact
+            if ownerobj.image:
+                data['image'] = ownerobj.image
+            else:
+                data['image'] = None
             data['is_verified'] = self.user.is_verified
         except Exception as e:
             pass
@@ -77,3 +80,13 @@ class RegisterUserSerializer(AppUserSerializer):
         
         owner.save()
         return owner
+
+
+
+
+class UserProfileSerializer(AppUserSerializer):
+    user = AppUserSerializer()
+    
+    class Meta:
+        model = Profile
+        fields = ('user','full_name', 'phone','contact','image' )

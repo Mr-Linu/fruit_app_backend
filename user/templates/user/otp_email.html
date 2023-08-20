@@ -1,0 +1,24 @@
+{% extends 'users/base.html' %}
+{% block content %}
+
+<h1 style="align-self: stretch; color: #121A26; font-size: 26px; font-weight: 700; line-height: 33.60px; word-wrap: break-word">Confirm Verification Code</h1> 
+<h3 style="width: 544px; color: #384860; font-size: 18px;  font-weight: 400; line-height: 24px; letter-spacing: 0.20px; word-wrap: break-word">Hi {{ name }},</h3>
+<p style="width: 544px; color: #384860; font-size: 18px; font-weight: 400; line-height: 24px; letter-spacing: 0.20px; word-wrap: break-word">This is your Verification code:</p>
+    {% for i in otp %}
+        <div style="width: 54px; height: 54px; padding: 19px; margin: 4px; background: #F8FAFC; border-radius: 8px; flex-direction: column; justify-content: center; align-items: center; gap: 10px; display: inline-flex">
+            <div style="text-align: center; color: #121A26; font-size: 40px; font-weight: 700; line-height: 39px; word-wrap: break-word">{{ i }}</div>
+        </div>
+    {% endfor %}
+
+<button style="color: white; font-size: 18px; font-weight: 700; line-height: 25.60px; padding: 15px; background: rgba(62, 191, 83, 0.8); border-radius: 8px; border: 0.50px #ffffff solid;">Verify Email</button>
+
+<br>
+<p>Thanks,<br>
+iMitre Team
+</p>
+
+{% endblock %}
+
+
+
+

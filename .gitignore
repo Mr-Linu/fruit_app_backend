@@ -1,6 +1,7 @@
 djangoenv/
 *.pyc
 venv/
+tensorflow/
 text.txt
 .env
 *.sqlite3
